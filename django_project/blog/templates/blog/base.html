@@ -129,6 +129,48 @@
             text-transform: uppercase;
         }
 
+        .form-label {
+            color: var(--ink);
+        }
+
+        .form-control {
+            background: #fff;
+            border-color: var(--line);
+            color: var(--ink);
+            border-radius: 0.7rem;
+            padding: 0.65rem 0.85rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 0.2rem rgba(196, 92, 38, 0.18);
+        }
+
+        .form-text,
+        .form-text ul {
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .form-text ul {
+            padding-left: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: #fff;
+            border: 0;
+            border-radius: 999px;
+            font-weight: 600;
+            padding: 0.65rem 1.1rem;
+        }
+
+        .btn-accent:hover {
+            background: #a94c1d;
+            color: #fff;
+        }
+
         @media (max-width: 575.98px) {
             .site-main {
                 padding-top: 1.5rem;
@@ -164,6 +206,10 @@
                             <a class="nav-link {% if request.resolver_match.url_name == 'blog-about' %}active{% endif %}"
                                 href="{% url 'blog-about' %}">About</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'register' %}active{% endif %}"
+                                href="{% url 'register' %}">Register</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -172,6 +218,11 @@
 
     <main class="site-main">
         <div class="container page-shell">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} mb-4" role="alert">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
             {% block content %}{% endblock %}
         </div>
     </main>
