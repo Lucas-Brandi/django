@@ -22,5 +22,27 @@ from users import views as user_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("register/", user_views.register, name="register"),
+    path("login/", user_views.UserLoginView.as_view(), name="login"),
+    path("logout/", user_views.UserLogoutView.as_view(), name="logout"),
+    path(
+        "password-reset/",
+        user_views.UserPasswordResetView.as_view(),
+        name="password_reset",
+    ),
+    path(
+        "password-reset/done/",
+        user_views.UserPasswordResetDoneView.as_view(),
+        name="password_reset_done",
+    ),
+    path(
+        "password-reset-confirm/<uidb64>/<token>/",
+        user_views.UserPasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    path(
+        "password-reset-complete/",
+        user_views.UserPasswordResetCompleteView.as_view(),
+        name="password_reset_complete",
+    ),
     path("", include("blog.urls")),
 ]

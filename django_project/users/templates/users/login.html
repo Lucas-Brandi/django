@@ -2,7 +2,7 @@
 
 {% block content %}
 <p class="page-kicker mb-2">Account</p>
-<h1 class="h3 fw-bold mb-4">Create an account</h1>
+<h1 class="h3 fw-bold mb-4">Log in</h1>
 
 <div class="card-post p-4">
     <form method="POST" novalidate>
@@ -20,20 +20,20 @@
         <div class="mb-3">
             <label class="form-label fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>
             {{ field }}
-            {% if field.help_text %}
-            <div class="form-text">{{ field.help_text|safe }}</div>
-            {% endif %}
             {% for error in field.errors %}
             <div class="invalid-feedback d-block">{{ error }}</div>
             {% endfor %}
         </div>
         {% endfor %}
 
-        <button type="submit" class="btn btn-accent w-100">Sign up</button>
+        <button type="submit" class="btn btn-accent w-100">Log in</button>
     </form>
 
-    <p class="form-text mt-3 mb-0">
-        Already have an account? <a href="{% url 'login' %}">Log in</a>
+    <p class="form-text mt-3 mb-1">
+        <a href="{% url 'password_reset' %}">Forgot password?</a>
+    </p>
+    <p class="form-text mb-0">
+        Need an account? <a href="{% url 'register' %}">Register</a>
     </p>
 </div>
 {% endblock %}
