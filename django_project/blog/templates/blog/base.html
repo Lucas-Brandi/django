@@ -103,7 +103,7 @@
             box-shadow: 0 10px 30px rgba(31, 25, 21, 0.05);
         }
 
-        .card-post + .card-post {
+        .card-post+.card-post {
             margin-top: 1.15rem;
         }
 
@@ -180,6 +180,25 @@
                 margin: 0.2rem 0;
             }
         }
+
+        .nav-avatar-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.6rem !important;
+        }
+
+        .nav-avatar {
+            width: 2rem;
+            height: 2rem;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--line);
+        }
+
+        .nav-avatar-link:hover .nav-avatar,
+        .nav-avatar-link.active .nav-avatar {
+            border-color: var(--accent);
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -207,6 +226,13 @@
                                 href="{% url 'blog-about' %}">About</a>
                         </li>
                         {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link nav-avatar-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}"
+                                href="{% url 'profile' %}" title="My profile">
+                                <img class="nav-avatar" src="{{ user.profile.image.url }}"
+                                    alt="{{ user.username }}'s profile picture">
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
